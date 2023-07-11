@@ -1,29 +1,32 @@
 pipeline {
     agent any
-    stages{
-        stage("Clone Code"){
-            steps{
-                git url: "https://github.com/LondheShubham153/node-todo-cicd.git", branch: "master"
+    environment {
+        DOCKERHUB_CREDS = credentials('dockerHub')
+    }
+    stages {
+        stage('Clone Repo') {
+            steps {
+                checkout scm
+                sh 'ls *'
             }
         }
-        stage("Build and Test"){
-            steps{
-                sh "docker build . -t node-app-test-new"
+        stage('Build Image') {
+            steps {
+                //sh 'docker build -t raj80dockerid/jenkinstest ./pushdockerimage/' (this will use the tag latest)
+		        sh 'docker build -t keshavkumar23022000/nodeapp-new-test:$BUILD_NUMBER .'
             }
         }
-        stage("Push to Docker Hub"){
-            steps{
-                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker tag node-app-test-new ${env.dockerHubUser}/node-app-test-new:latest"
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker push ${env.dockerHubUser}/node-app-test-new:latest"
+        stage('Docker Login') {
+            steps {
+                //sh 'docker login -u $DOCKERHUB_CREDS_USR -p $DOCKERHUB_CREDS_PSW' (this will leave the password visible)
+                sh 'echo $DOCKERHUB_CREDS_PSW | docker login -u $DOCKERHUB_CREDS_USR --password-stdin'  
+                sh 'docker push keshavkumar23022000/nodeapp-new-test:$BUILD_NUMBER'              
                 }
-            }
         }
         stage("Deploy"){
             steps{
                 sh "docker-compose down && docker-compose up -d"
             }
-        }
-    }
+        }    
+    }    
 }
