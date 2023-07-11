@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: "keshavkumar23022000/nodeapp-new-test"
+    image: "keshavkumar23022000/nodetodoapp-new-test"
     ports:
       - "8000:8000"
