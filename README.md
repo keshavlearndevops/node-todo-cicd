@@ -22,71 +22,88 @@ The **Node Todo Application with CI/CD using Jenkins** is a comprehensive projec
 3. Port number 8080 must be added as an inbound rule for the Master Instance, and 8000 must be added to the inbound rule of the Agent.
 4. Basic Knowledge of `docker-compose.yml` file and Docker.
 
-## Getting Started
+### 1. Fork the Repository
 
-To experience the seamless integration of CI/CD using Jenkins and the power of Docker, follow these steps:
+Kickstart your journey by forking this repository. Click on the Fork icon (![Fork Icon](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/fd354b6e-4ecb-486d-a3e0-2f9878276b6e)) at the top-right corner to make the repository yours.
 
-1. Fork this repository: Fork the repository as shown below by clocking on the Fork icon on the top right. 
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/fd354b6e-4ecb-486d-a3e0-2f9878276b6e)
+### 2. Launch Jenkins Master and Agent
 
-2. Starting the Jenkins Master and Agent: Let's start our both Jenkins Master and Jenkins Agent. Log in to the Jenkins UI and as we have stopped our Agent Its Public IP got changed, so we have to update the changed IP in the Agent configuration on the Jenkins Console. 
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/e8fbf6d1-3eba-4524-b1d3-1c83e51945d0)
+Fire up the Jenkins Master and Agent. Access the Jenkins UI and ensure the Agent's IP is updated in the Jenkins Console if needed.
+![Starting Jenkins](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/e8fbf6d1-3eba-4524-b1d3-1c83e51945d0)
 
-3. Create a Freestyle Project, I named it *my-node-freestyle* and select the GitHub Project and paste the code URL, I want it to run on my agent only so click on __Restrict where this project can be run__ and type your agent name as shown in the image.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/9dee920d-1c46-449f-9bdc-bf37b251b65f)
+### 3. Create a Freestyle Project
 
-4. Integrating GitHub Webhook:They trigger Jenkins to build, test, and deploy code when GitHub events like pushes and pull requests occur, enabling real-time feedback, automated testing, and efficient development and deployment processes.Go to the GitHub Repository on top of it you will see _settings_, click on it and you will see _webhook_ in the list click on it and hit _Add Webhook_, put the payload URL as `Jenkins-ip/github-webhook/` as shown in the image below, reload the page and it will show a _green_ tick.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/ee8a09a6-e4c7-457b-aca4-cf644df84df9)
+Craft your destiny by creating a Freestyle Project named *my-node-freestyle* on Jenkins. Configure it to run on your desired agent, and watch as the path to greatness unfolds.
+![Creating Freestyle Project](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/9dee920d-1c46-449f-9bdc-bf37b251b65f)
 
-5. Reload the page of github, the webhook will be active as shown by the green tick.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/a26c3cd4-b8da-4e0b-8353-19db08f6cdb9)
+### 4. Integrate GitHub Webhook
 
-6. Select the GitHub hook trigger for GITScm polling so that our Jenkins must know about the webhook.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/8b59774a-54b2-4e7c-8d45-f45905e1191d)
+Unleash the power of GitHub Webhooks! These triggers orchestrate Jenkins to build, test, and deploy code. Set up the webhook, add the payload URL, and witness the green tick of validation.
+![GitHub Webhook Setup](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/ee8a09a6-e4c7-457b-aca4-cf644df84df9)
 
-7. In the Source Code Management step do the following changes.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/87582133-5d95-46b6-ae51-75073bef227d)
+### 5. Awaken the Webhook
 
-8. Viewing the Dockerfile and learning what things are there.
- ```Dockerfile
-# Use the official Node.js 12.2.0 image based on Alpine Linux as the base image
+Experience the awakening of the webhook as the green tick emerges. The realm of automation is at your command!
+![Webhook Activation](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/a26c3cd4-b8da-4e0b-8353-19db08f6cdb9)
+
+### 6. Journey with GitHub Hook Trigger
+
+Engage the GitHub hook trigger to connect Jenkins with your webhook. Unleash the true power of automation and unlock the GitHub realm's secrets.
+![GitHub Hook Trigger](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/8b59774a-54b2-4e7c-8d45-f45905e1191d)
+
+### 7. Source Code Management Magic
+
+In the realm of Source Code Management, enact the changes that shape destinies. Tune your frequencies to the code's rhythm, and let the enchantment begin.
+![Source Code Management](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/87582133-5d95-46b6-ae51-75073bef227d)
+
+### 8. Unveil the Dockerfile Secrets
+
+Unearth the magic within the Dockerfile. Witness the incantations that install dependencies, execute tests, and expose the power of your creation.
+```Dockerfile
+# Witness the majestic Dockerfile
+
+# Base image: The legendary Node.js 12.2.0 on Alpine Linux
 FROM node:12.2.0-alpine
 
-# Set the working directory inside the container to /app
+# Set the container's heart at /app
 WORKDIR /app
 
-# Copy all files and directories from the current directory (where the Dockerfile is located)
-# to the /app directory inside the container
+# Infuse the essence of your realm into the container
 COPY . .
 
-# Run the npm install command inside the container to install dependencies
+# Instill the powers of the universe – npm install
 RUN npm install
 
-# Run the npm run test command inside the container to execute tests
+# Let the tests weave their spells
 RUN npm run test
 
-# Expose port 8000 from the container to the host machine
+# Open the gates to port 8000
 EXPOSE 8000
 
-# Specify the command to run when the container starts
+# As the stars align, summon 'node app.js'
 CMD ["node", "app.js"]
 ```
-9. Creating a docker-compse.yml file
-```docker-compose.yml
-# Specify the version of Docker Compose file format
+### 9. Embrace Docker-Compose Chronicles
+
+Enter the realm of docker-compose.yml, where you wield the ancient syntax to shape your destiny. Define services, map ports, and orchestrate the dance of containers.
+
+```yaml
+Copy code
+# Embrace the Docker-Compose Chronicles
+
+# Enchantment level: Docker Compose format version 3.9
 version: '3.9'
 
-# Define a service named 'web'
+# Behold the service named 'web'
 services:
   web:
-    # Build the Docker image using the Dockerfile in the current directory
+    # Forge an image from the Dockerfile's essence
     build: .
 
-    # Map port 8000 on the host to port 8000 in the container
-    ports:
-      - "8000:8000"
+    # Map the mystical port 8000
 ```
-10. In the Build Steps on the Jenkins console, select execute shell and type in the below commands
+### 10. In the Build Steps on the Jenkins console, select execute shell and type in the below commands
+
 ```bash
 # Stop and remove containers, networks, and volumes defined in the docker-compose.yml file
 docker-compose down
@@ -97,30 +114,36 @@ docker-compose down
 # --build: Build images before starting containers
 docker-compose up -d --no-deps --build web
 ```
-11. Now just do any modification in the code on the GitHub Repository and commit it. I did the following change in _views>todo.ejs_ file as shown below
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/c34bdaef-ecc4-4eb2-b891-0668d58c23a7)
+### 11. Code Modification
 
-12. This is the screen of Jenkins before you do a commit on the GitHub Repository, there is just 1 build which got created when I changed the docker-compose file on the GitHub
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/9238c2ea-01fe-4e22-8fb1-6c7ca61b6979)
+Start by making a change to the code in the GitHub repository. For instance, I made a tweak to the `_views>todo.ejs` file, as shown below:
 
-13. Now let's do a commit on the repository and see the Jenkins Magic. As soon as you hit commit you will see a new build is triggered as shown below
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/f84e5f2a-ea8a-432e-aac5-8c0aff4d2a89)
+![Code Modification](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/c34bdaef-ecc4-4eb2-b891-0668d58c23a7)
 
-And when you see the Console Output of Build Number 2, it will show that it got triggered by GitHub push event and it is running on my dev agent as shown below
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/2f5ccdd6-28a8-49eb-8dd0-7938a612b9f1)
+### 12. Jenkins Build Process - Pre-Commit Build
 
-14. Okay now let's check if it is working and reflecting our modified changes. But first, make sure to add an inbound rule of port 8000 on the agent instance as we are exposing it from Dockerfile and docker-compose file. I have already added it, lets copy the public IP of the Agent Instance and append it with the port 8000 like 54.88.127.94:8000 and hit enter in a new tab. If you got the below output then my friend you have completed the Project. Happy Learning!
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/cac2157c-ce4b-488f-8a27-b2b16f2bf05c)
+Before committing your changes to the GitHub repository, take a look at Jenkins. You'll notice a single build, which was triggered when I modified the `docker-compose` file:
 
+![Pre-Commit Build](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/9238c2ea-01fe-4e22-8fb1-6c7ca61b6979)
 
+### 13. Witness the Jenkins Magic
 
+Now, commit your changes to the repository and experience the magic orchestrated by Jenkins. As soon as you hit the commit button, a new build is set in motion, as illustrated below:
 
+![Jenkins Magic](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/f84e5f2a-ea8a-432e-aac5-8c0aff4d2a89)
 
+### 14. Dive into Console Output Insights
 
+Delve into the details by exploring the Console Output for Build Number 2. This build was triggered by a GitHub push event and is diligently executed by our vigilant dev agent:
 
+![Console Output](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/2f5ccdd6-28a8-49eb-8dd0-7938a612b9f1)
 
+## Final Test and Completion
 
+It's time to put your creation to the ultimate test:
 
+### 15. Project Validation
 
+Before proceeding, ensure that you've added an inbound rule for port 8000 on the agent instance. Since this port is exposed in both the Dockerfile and docker-compose, this step is essential. I've got you covered! Now, with the public IP of the Agent Instance in hand, combine it with port 8000 (e.g., `54.88.127.94:8000`) and enter it in a new browser tab. Witness the output below – if you see it, congratulations! You've successfully completed the Project. Happy Learning!
 
-
+![Final Test](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/cac2157c-ce4b-488f-8a27-b2b16f2bf05c)
