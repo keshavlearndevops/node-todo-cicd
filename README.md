@@ -28,17 +28,25 @@ To experience the seamless integration of CI/CD using Jenkins and the power of D
 
 1. Fork this repository: Fork the repository as shown below by clocking on the Fork icon on the top right. 
 ![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/fd354b6e-4ecb-486d-a3e0-2f9878276b6e)
-2. Starting the Jenkins Master and Agent: Let's start our both Jenkins Master and Jenkins Agent. Log in to the Jenkins UI and as we have stopped our Agent Its Public IP got changed, so we have to update the changed IP in the Agent configuration on the Jenkins Console. ![image]((https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/a48ad396-4e88-4a66-8814-a1200cb358df).
+
+2. Starting the Jenkins Master and Agent: Let's start our both Jenkins Master and Jenkins Agent. Log in to the Jenkins UI and as we have stopped our Agent Its Public IP got changed, so we have to update the changed IP in the Agent configuration on the Jenkins Console. 
+![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/e8fbf6d1-3eba-4524-b1d3-1c83e51945d0)
+
 3. Create a Freestyle Project, I named it *my-node-freestyle* and select the GitHub Project and paste the code URL, I want it to run on my agent only so click on __Restrict where this project can be run__ and type your agent name as shown in the image.
 ![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/9dee920d-1c46-449f-9bdc-bf37b251b65f)
+
 4. Integrating GitHub Webhook:They trigger Jenkins to build, test, and deploy code when GitHub events like pushes and pull requests occur, enabling real-time feedback, automated testing, and efficient development and deployment processes.Go to the GitHub Repository on top of it you will see _settings_, click on it and you will see _webhook_ in the list click on it and hit _Add Webhook_, put the payload URL as `Jenkins-ip/github-webhook/` as shown in the image below, reload the page and it will show a _green_ tick.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/ee8a09a6-e4c7-457b-aca4-cf644df84df9).
+![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/ee8a09a6-e4c7-457b-aca4-cf644df84df9)
+
 5. Reload the page of github, the webhook will be active as shown by the green tick.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/a26c3cd4-b8da-4e0b-8353-19db08f6cdb9).
+![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/a26c3cd4-b8da-4e0b-8353-19db08f6cdb9)
+
 6. Select the GitHub hook trigger for GITScm polling so that our Jenkins must know about the webhook.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/8b59774a-54b2-4e7c-8d45-f45905e1191d).
+![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/8b59774a-54b2-4e7c-8d45-f45905e1191d)
+
 7. In the Source Code Management step do the following changes.
-![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/87582133-5d95-46b6-ae51-75073bef227d).
+![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/87582133-5d95-46b6-ae51-75073bef227d)
+
 8. Viewing the Dockerfile and learning what things are there.
  ```Dockerfile
 # Use the official Node.js 12.2.0 image based on Alpine Linux as the base image
@@ -91,12 +99,16 @@ docker-compose up -d --no-deps --build web
 ```
 11. Now just do any modification in the code on the GitHub Repository and commit it. I did the following change in _views>todo.ejs_ file as shown below
 ![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/c34bdaef-ecc4-4eb2-b891-0668d58c23a7)
+
 12. This is the screen of Jenkins before you do a commit on the GitHub Repository, there is just 1 build which got created when I changed the docker-compose file on the GitHub
 ![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/9238c2ea-01fe-4e22-8fb1-6c7ca61b6979)
+
 13. Now let's do a commit on the repository and see the Jenkins Magic. As soon as you hit commit you will see a new build is triggered as shown below
 ![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/f84e5f2a-ea8a-432e-aac5-8c0aff4d2a89)
+
 And when you see the Console Output of Build Number 2, it will show that it got triggered by GitHub push event and it is running on my dev agent as shown below
 ![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/2f5ccdd6-28a8-49eb-8dd0-7938a612b9f1)
+
 14. Okay now let's check if it is working and reflecting our modified changes. But first, make sure to add an inbound rule of port 8000 on the agent instance as we are exposing it from Dockerfile and docker-compose file. I have already added it, lets copy the public IP of the Agent Instance and append it with the port 8000 like 54.88.127.94:8000 and hit enter in a new tab. If you got the below output then my friend you have completed the Project. Happy Learning!
 ![image](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/cac2157c-ce4b-488f-8a27-b2b16f2bf05c)
 
