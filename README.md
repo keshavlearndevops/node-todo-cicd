@@ -24,7 +24,7 @@ The **Node Todo Application with CI/CD using Jenkins** is a comprehensive projec
 
 ### 1. Fork the Repository
 
-Kickstart your journey by forking this repository. Click on the Fork icon (![Fork Icon](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/fd354b6e-4ecb-486d-a3e0-2f9878276b6e)) at the top-right corner to make the repository yours.
+Kickstart your journey by forking this repository. Click on the Fork icon ![Fork Icon](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/fd354b6e-4ecb-486d-a3e0-2f9878276b6e) at the top-right corner to make the repository yours.
 
 ### 2. Launch Jenkins Master and Agent
 
