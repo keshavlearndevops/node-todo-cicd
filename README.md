@@ -13,14 +13,14 @@ The **Node Todo Application with CI/CD using Jenkins** is a comprehensive projec
 - **Dockerization**: Utilize Docker to containerize the application, providing consistent and isolated runtime environments.
 - **Infrastructure as Code**: Use the provided Dockerfile and docker-compose.yml to define the application's infrastructure in code.
 - **Effortless Setup**: Clone the repository, and the CI/CD pipeline will automatically build and deploy the application using Docker Compose.
-- **Working with Agents**: In this Project we haves used the Jenkins Master-Agent Architecture, All the jobs are build by Agent only.
+- **Working with Agents**: In this Project, we have used the Jenkins Master-Agent Architecture. All the jobs are built by the Agent only.
 
 ## Prerequisites
 
-1. Jenkins Master and Agent must be setup, refer this [blog](https://keshavbathla.hashnode.dev/mastering-jenkins-agents-effortless-two-tier-app-deployment-on-the-freestyle-project)
-2. Dockerand Docker Compose must be installed `sudo apt install docker.io -y` and `sudo apt install docker-compose -y`
-3. Port number 8080 must be added as s inbound rule for the Master Instance and 8000 must be added to the inbound rule of the Agent.
-4. Basic Knowledge of `docker-compose.yml` file and docker
+1. Jenkins Master and Agent must be set up, refer to this [blog](https://keshavbathla.hashnode.dev/mastering-jenkins-agents-effortless-two-tier-app-deployment-on-the-freestyle-project).
+2. Docker and Docker Compose must be installed (`sudo apt install docker.io -y` and `sudo apt install docker-compose -y`).
+3. Port number 8080 must be added as an inbound rule for the Master Instance, and 8000 must be added to the inbound rule of the Agent.
+4. Basic Knowledge of `docker-compose.yml` file and Docker.
 
 ## Getting Started
 
