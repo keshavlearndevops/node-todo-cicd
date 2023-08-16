@@ -88,7 +88,6 @@ CMD ["node", "app.js"]
 Enter the realm of docker-compose.yml, where you wield the ancient syntax to shape your destiny. Define services, map ports, and orchestrate the dance of containers.
 
 ```yaml
-Copy code
 # Embrace the Docker-Compose Chronicles
 
 # Enchantment level: Docker Compose format version 3.9
