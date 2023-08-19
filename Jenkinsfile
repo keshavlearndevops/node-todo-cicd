@@ -1,5 +1,7 @@
-pipeline {
-    agent any
+/* pipeline {
+    agent {
+	    label 'dev-agent'
+    }
     environment {
         DOCKERHUB_CREDS = credentials('dockerHub')
     }
@@ -12,7 +14,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                //sh 'docker build -t raj80dockerid/jenkinstest ./pushdockerimage/' (this will use the tag latest)
+                // (this will use the tag latest)
 		        sh 'docker build -t keshavkumar23022000/nodetodoapp-new-test .'
             }
         }
@@ -28,5 +30,41 @@ pipeline {
                 sh "docker-compose down && docker-compose up -d"
             }
         }    
+    }    
+}
+*/
+pipeline {
+    agent {
+        label 'dev-agent'
+    }
+    stages {
+        stage('Code'){
+            steps{
+                git url:'https://github.com/keshavlearndevops/node-todo-cicd.git',branch:'master'
+            }
+        }
+        stage('Build & Test'){
+            steps{
+                sh 'docker build -t my-node-application .'
+            }
+            
+        }
+        stage('Push to Repository'){
+            steps{
+                withCredentials([usernamePassword(credentialsId:'dockerHub', passwordVariable:'dockerHubPass',usernameVariable:'dockerHubUser')]){
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                    sh "docker tag my-node-application:latest ${env.dockerHubUser}/my-node-application:latest"
+                    sh "docker push ${env.dockerHubUser}/my-node-application:latest"
+                    
+                }
+            }
+        }
+        stage('Deploy'){
+            steps{
+                sh "docker-compose down"
+                sh 'docker-compose up -d'
+            }
+ 
+        }
     }    
 }
