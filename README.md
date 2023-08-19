@@ -143,6 +143,6 @@ It's time to put your creation to the ultimate test:
 
 ### 15. Project Validation
 
-Before proceeding, ensure that you've added an inbound rule for port 8000 on the agent instance. Since this port is exposed in both the Dockerfile and docker-compose, this step is essential. I've got you covered! Now, with the public IP of the Agent Instance in hand, combine it with port 8000 (e.g., `54.88.127.94:8000`) and enter it in a new browser tab. Witness the output below – if you see it, congratulations! You've successfully completed the Project. Happy Learning!
+Before proceeding, ensure that you've added an inbound rule for port 8000 on the agent instance. Since this port is exposed in both the Dockerfile and docker-compose, this step is essential. I've got you covered! Now, with the public IP of the Agent Instance in hand, combine it with port 8000 (e.g., `54.88.127.94:8000`) and enter it in a new browser tab. Witness the output below – if you see it, congratulations! You've successfully completed this Project. Happy Learning!
 
 ![Final Test](https://github.com/keshavlearndevops/node-todo-cicd/assets/134159375/cac2157c-ce4b-488f-8a27-b2b16f2bf05c)
