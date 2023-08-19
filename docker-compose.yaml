@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: keshavkumar23022000/my-node-application:lattest
+    image: "keshavkumar23022000/my-node-application:lattest"
     ports:
       - "8000:8000"
